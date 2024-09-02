@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Popup from "./theme-option/Popup";
-// import Tab_content from "./Tab-content";
-import Tabs from './Tabs';
-import Tab from './Tab';
 
 function Shippingmethod() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -11,8 +8,8 @@ function Shippingmethod() {
     setIsPopupOpen(!isPopupOpen);
   };
   const [form_data,setForm_data] = useState({
-    name:'',
-    price: ""
+    method:'',
+    price:''
   })
   const [methodentries, setMethodentries] = useState([]);
  
@@ -45,20 +42,10 @@ function Shippingmethod() {
       localStorage.setItem("Shipping Method", JSON.stringify(updatedEntries));  
       return updatedEntries;
     });
-    setForm_data({ name: '', price: "" }); 
+    setForm_data({ method: '', price: '' }); 
   }
   const handleClose = ()=>{
     console.log("delete button");
-  }
-
-  const handleupdate = ()=>{
-    console.log("handle update");
-  }
-  const handleedit = ()=>{
-    console.log("handle edit");
-  }
-  const handledelete =()=>{
-    console.log("handle delete")
   }
     
   return (
@@ -72,17 +59,22 @@ function Shippingmethod() {
           <h1 className="font-medium mb-2 sm:text-3xl text-gray-900 text-center "> Shipping Method </h1>
           <p className=" leading-relaxed mb-1 "> Create Shipping method for Best product Delivery to Your Door Step!. </p>
           <h2 className=""></h2>
-          {console.log(select_list)}
-          <div className="shipping-method-tab">
-          {select_list.length !==0?( console.log("true") ):( console.log("false") )}
-             <Tabs>
-        <Tab label="Create Shipping Method" className={`${select_list.length !==0?( "true" ):( "false" )}`}>
-          <div>
+          <div className=' select-option '> 
+            <label className=" font-medium text-gray-900 text-lg text-center mb-1 "> The List of Created Shipping Method </label>
+            <select className=" mt-2 border-solid border border-slate-300 rounded block p-2 text-gray-600 w-full text-sm "  >           
+              {                
+              select_list.map((list_option, index) => {
+                return (
+                  <option key={index} value={list_option.price} name={list_option.method} > {list_option.method} {list_option.price>0?` - ${list_option.price}`:""} </option>
+                );
+              })}
+            </select>
+          </div>
           <h2 className=" font-medium text-gray-900 text-lg text-center mt-4 "> Create New Shipping Method </h2>
           <form onSubmit={handleSubmit} className=" form-body flex flex-wrap ">
             <div className="relative p-2 w-1/2 ">
               <label htmlFor="shippingmethod" className="leading-7 ">Shipping Method Name:</label>
-              <input onChange={handleChange} value={form_data.name} required type="text" id="shippingmethod" name="name" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+              <input onChange={handleChange} value={form_data.method} required type="text" id="shippingmethod" name="method" className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
             </div>
             <div className="relative p-2 w-1/2 ">
               <label htmlFor="shippingprice" className="leading-7 " >Shipping Price:</label>
@@ -90,66 +82,12 @@ function Shippingmethod() {
             </div>
             <div className="p-2 pt-4 w-full gap-5 flex ">
               <button className=" w-2/4 border-0 px-8 py-2 rounded text-lg "> Create Shipping Method </button>
+              <button className=" w-2/4 border-0 px-8 py-2 rounded text-lg text-red-600 " onClick={handleClose}> Delete Shipping Method </button>
+
             </div>
           </form>
-          </div>
-        </Tab>
-        <Tab label="List of Shipping Method">
-        <div className=' select-option-list '> 
-          <div className="p-2 pt-4 w-full gap-5 flex ">
-          <button className=" w-2/4 border-0 px-8 py-2 rounded text-lg "> Create </button>
-          <button className=" w-2/4 border-0 px-8 py-2 rounded text-lg text-red-600 " > List </button>
-           </div> <label className=" font-medium text-gray-900 text-lg text-center mb-1 "> The List of Created Shipping Method </label>
-            <div className="  "  >   
-            <table>
-  <thead>
-  <tr>
-    <th>Serial #</th>
-    <th>Shipping Method</th>
-    <th>Actions</th>
-  </tr>
-  </thead>
-  <tbody>
-  {                
-              select_list.map((list_option, index) => {
-                return (
-                  <tr>
-                  <td>{index + 1}</td>
-                  <td>{list_option.name} - {list_option.price}</td>
-                  <td><button onClick={handleupdate}>Update</button>
-                  <button onClick={handleedit}>Edit</button>
-                  <button onClick={handledelete}>Delete</button></td>
-                </tr>
-                  // <div key={index} value={list_option.price} name={list_option.name} > {list_option.name} {list_option.price>0?` - ${list_option.price}`:""} </div>
-                );
-              })}
-  </tbody>
-</table>        
-              {                
-              select_list.map((list_option, index) => {
-                return (
-                  <>
-                   <div className="flex gap-2.5 items-center ">
-                   <div>{index + 1}</div>
-                    
-                    
-                    <div>{list_option.name} </div>
-                    <div className="mr-auto">{list_option.price}</div>
-                   
-                 
-                    <div><button>Update</button></div>
-                    <div><button>Edit</button></div>
-                    <div><button>Delete</button></div>
-                    
-                   </div>
-                  </>
-                  // <div key={index} value={list_option.price} name={list_option.name} > {list_option.name} {list_option.price>0?` - ${list_option.price}`:""} </div>
-                );
-              })}
-            </div>
-          </div>
-        </Tab>
-      </Tabs>
+          <div className="crud-function-body">
+
           </div>
         </div>
       </Popup>

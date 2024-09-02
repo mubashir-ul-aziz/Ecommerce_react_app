@@ -1,3 +1,11 @@
+
+
+
+
+
+
+
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import CartQuantity from 'components/Cart_quentity.jsx';
@@ -31,16 +39,14 @@ let saved_shipping_method = [];
   saved_shipping_method = localStorage.getItem('Shipping Method');
   if (saved_shipping_method !== null) {
     saved_shipping_method = JSON.parse(saved_shipping_method);
-    saved_shipping_method.forEach(item => {
-    item.price = Number(item.price);
-  });
     // saved_shipping_method.unshift({ method: " View Method ", price: "" },);
   } else {
     saved_shipping_method = [];
   }
-  console.log(saved_shipping_method);
-  
+  console.log(saved_shipping_method)
   const shipping_option = saved_shipping_method;
+
+
 // const shipping_option = [
 //   { name: "Select Option", price: 0 },
 //   { name: "COD Shipping", price: 10.00 },
@@ -48,9 +54,14 @@ let saved_shipping_method = [];
 //   { name: "Fast Shipping", price: 20.00 },
 // ];
 const handleChange = (event) => {
+  console.log(event.target.value);
   const selectedOptionName = event.target.value;
+  console.log(selectedOptionName);
+  console.log(typeof(selectedOptionName))
   setSelectedOption(selectedOptionName);
-    const selectedShippingOption = shipping_option.find(option => option.name === selectedOptionName);
+    const selectedShippingOption = shipping_option.find(option => option.method === selectedOptionName);
+    console.log(selectedShippingOption);
+    console.log(typeof(selectedShippingOption))
     if (selectedShippingOption) {
       localStorage.setItem("Selected Shipping Method", JSON.stringify(selectedShippingOption));
       setexact_price(total_price + selectedShippingOption.price)
@@ -60,17 +71,19 @@ const handleChange = (event) => {
 };
 useEffect(()=>{
   const storedShippingMethod = JSON.parse(localStorage.getItem("Selected Shipping Method"))
-  if (storedShippingMethod && storedShippingMethod.name) {
-    setSelectedOption(storedShippingMethod.name);
+  if (storedShippingMethod && storedShippingMethod.method) {
+    setSelectedOption(storedShippingMethod.method);
     setexact_price(total_price + storedShippingMethod.price);
   }
 },[]);
 useEffect(() => {
-  const selectedShippingOption = shipping_option.find(option => option.name === selectedOption);
+  const selectedShippingOption = shipping_option.find(option => option.method === selectedOption);
   if (selectedShippingOption) {
     setexact_price(total_price + selectedShippingOption.price);
+    console.log("if useeffect last ")
   } else {
     setexact_price(total_price);
+    console.log("if total price" )
   }
 }, [total_price, selectedOption]);
 
@@ -78,13 +91,11 @@ if (!cartItems.length) {
   return <div>Cart is Empty</div>;
 }
 
-
-
   return (
-    <div className={` ${saved_shipping_method?("true"):("false")} cart_component `}>
+    <div className=" cart_component">
       <div className="container mx-auto mt-10">
         <div className="flex my-10">
-          <div className="w-3/4 bg-whit px-10 py-10 border-solid border-t border border-slate-100 shadow-lg ">
+          <div className="w-3/4 bg-white px-10 py-10 border-solid border-t border border-slate-100 shadow-lg ">
             <div className="flex justify-between border-b pb-8">
               <h1 className="font-semibold text-2xl">Shopping Cart</h1>
               <h2 className="font-semibold text-2xl">{cartItems.length} Items</h2>
@@ -140,24 +151,18 @@ if (!cartItems.length) {
               <span className="font-semibold text-sm">PKR ${total_price} </span>
             </div>
             <div className=' shipping-method '> 
-              <label className={`${shipping_option.length !== 0 ?(" mb-3 "):(" ")} font-medium inline-block text-sm uppercase `}> {shipping_option.length !== 0 ?("Shipping Method"):("No Shipping Method Available.")}</label>
-              {console.log(shipping_option)}
-                    {shipping_option.length !== 0 ?(
-                        <>
-                      {console.log("true")}
+              <label className="font-medium inline-block mb-3 text-sm uppercase">Shipping</label>
               <select className=" border-solid border border-slate-300 rounded block p-2 text-gray-600 w-full text-sm " value={selectedOption} onChange={handleChange}>
-
-                      {shipping_option.map((shipping_option, index) => {
-                        return (
-                          <option key={index} value={shipping_option.name} >{shipping_option.name}{shipping_option.price>0?` - $${shipping_option.price}`:""}</option>
-                        );
-                      })}
+               
+              {shipping_option.map((shipping_option, index) => {
+                console.log(shipping_option.method)
+                return (
+                  <option key={index} value={shipping_option.method} >{shipping_option.method}{shipping_option.price>0?` - PKR${shipping_option.price}`:""}</option>
+                );
+              })}
               </select>
-              </>
-                    ):("")}
-              
             </div>
-            <div className={`${shipping_option.length !== 0 ?("py-10"):("py-6")}`}>
+            <div className="py-10">
               <label htmlFor="promo" className="font-semibold inline-block mb-3 text-sm uppercase">Promo Code</label><span className='float-right' >display promocode</span>
               <input type="text" id="promo" placeholder="Enter your code" className=" border-solid border border-slate-300 rounded p-2 text-sm w-full " />
             </div>
@@ -178,3 +183,4 @@ if (!cartItems.length) {
 }
 
 export default Prd_cart;
+

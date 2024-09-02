@@ -14,6 +14,7 @@ function Signup() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const handleSubmit = (e) => {
+    console.log(formData);
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
         alert("Passwords don't match!");
@@ -51,6 +52,7 @@ console.log(updatedUsers)
         confirmPassword: '',
     }]);
     navigation("/login"); 
+    console.log(formData);
   };
   return (
       <div className=" signup-component ">
