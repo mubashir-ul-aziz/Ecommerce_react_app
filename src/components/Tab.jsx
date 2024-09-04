@@ -1,7 +1,7 @@
-// import React from 'react';
+import React from 'react';
 
-// const Tab = ({ label, children, className}) => {
-//   return <div className={className}>{children}</div>;
-// };
+const Tab = ({ label, children, className}) => {
+  return <div className={className}>{children}</div>;
+};
 
-// export default Tab;
+export default Tab;

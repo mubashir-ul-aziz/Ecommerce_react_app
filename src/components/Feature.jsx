@@ -18,7 +18,7 @@ function Feature({ cards = [1, 2, 3, 4, 5] }) {
                 
                   {cards?.map((card, index) => (
                          
-                            <Link to={`/category/${card}`} key={index} className=" p-4 md:w-1/3">
+              <Link to={`/category/${card}`} key={index} className=" p-4 md:w-1/3">
                 <div className=" cursor-pointer flex rounded-lg h-full bg-gray-100 p-8 flex-col">
                 <div className="flex items-center mb-3">
                     <div className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">

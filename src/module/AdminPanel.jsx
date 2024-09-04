@@ -34,6 +34,12 @@ const left_admin_nav = [
     path: "/order",
     svg: "M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4",
   },
+  {
+   name: "Popup",
+   className: "",
+   path: "/",
+   svg: "M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4",
+ }
   // { name:"Users", className:"", path:"/users", svg:"M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" },
   // { name:"History", className:"", path:"/history", svg:"M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" },
   // { name:"", path:"/", svg:"" }
@@ -63,7 +69,7 @@ function AdminPanel() {
                 if (nav_item.component) {
                   // Handle the component type
                   return <div key={index}>{nav_item.component}</div>;
-                } else if (nav_item.name === "User Profile") {
+                } else if (nav_item.name === "Popup") {
                   // Special handling for "User Profile"
                   return (
                     <div
@@ -398,19 +404,8 @@ function AdminPanel() {
       </div>
       {isPopupOpen && (
         <Popup isOpen={isPopupOpen} handleClose={togglePopup}>
-          <div className="checkboxes__row">
-            <div className="checkboxes__item">
-              <label className="checkbox style-e">
-                <div className="checkbox__checkmark"></div>
-                <div className="checkbox__body">textSticky</div>
-              </label>
-            </div>
-          </div>
-          <div className="checkboxes__item">
-            <label className="checkbox style-e">
-              <div className="checkbox__checkmark"></div>
-              <div className="checkbox__body">checkedThemeText</div>
-            </label>
+          <div className="popup-body">
+           <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Popup Body</h1>
           </div>
         </Popup>
       )}
