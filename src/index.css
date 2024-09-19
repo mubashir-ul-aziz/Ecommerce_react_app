@@ -321,6 +321,7 @@ html {
 .tab-component .tabs button.active:hover:after {
   background: #767b83;
   height: 6px;
+  z-index: 1;
 }
 .tab-component .tab-content-body {
   border: 2px solid #767b83;
@@ -364,7 +365,6 @@ input[type="checkbox"]:checked {
 .child-div-border:last-child {
  border-right: 2px solid rgb(229 231 235 / var(--tw-border-opacity));
 }
-
 
 
 

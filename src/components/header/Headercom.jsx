@@ -7,12 +7,15 @@ import Logout from 'module/Logout.jsx'
 import { useMemo } from 'react';
 import { useContext } from 'react';
 import { useLocation } from "react-router-dom";
+import Shippingmethod from 'components/Shippingmethod.jsx'
+
 const button_navigation=[
   // {name: "Go to Cart ",path: "/cart", className:"mr-2"},
   // {name: "Login ",path: "/login", className:"mr-2"},
   // {name: "Sign Up ",path: "/signup", className:"mr-2"},
   // {name: "User Profile",path: "/userprofile",className:"mr-2"},
-  // {component: <Logout/>} 
+  // {component: <Logout/>}
+  { component: <Shippingmethod svg={false} dynmc_class=" mr-2 button inline-flex items-center text-white border-0 py-2 px-4 focus:outline-none rounded text-base mt-4 md:mt-0 " />},
   {name: "Go to Cart", path: "/cart", className:"mr-2"},
   {component: <Logout btnstyle='btnfalse' />} 
 ]
@@ -73,13 +76,18 @@ const location = useLocation();
             </svg>
             <span className="ml-3 text-xl">Ecommerce </span>
           </Link>
-          <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+          <nav className=" custom-main-nav md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
             {navigation.map((navigation, index) => {
+               if (navigation.component) {
+                console.log("component ");
+                // Handle the component type
+                return <div key={index}>{navigation.component}</div>;
+              } else {
               return (
                 <Link to={navigation.path} key={index} className="mr-5 over:text-gray-900" >
                   {navigation.name}
                 </Link>
-              );
+              );}
             })}
           </nav>    
         <div className="left-side-buttons flex">
@@ -89,7 +97,7 @@ const location = useLocation();
 
         {button_navigation.map((navigation, index) => {            
   return navigation.component ? (
-    <div key={index}>{navigation.component}</div>
+    <div className=" header-button-sty " key={index}>{navigation.component}</div>
   ) : (
     <Link 
       to={navigation.path} 

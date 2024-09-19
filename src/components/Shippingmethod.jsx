@@ -6,7 +6,7 @@ import Popup from "./theme-option/Popup";
 import Tabs from './Tabs';
 import Tab from './Tab';
 
-function Shippingmethod() {
+function Shippingmethod({dynmc_class, svg }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const popupwidth = ['200px', '300px', '400px', '500px', "600px", "700px", "800px"];
   const [button_toggle, setButton_toggle] = useState(true);
@@ -25,13 +25,6 @@ function Shippingmethod() {
 
   const togglePopup = () => {
     setIsPopupOpen(!isPopupOpen);
-  };
-
-  const handleCheckboxChange = (event) => {
-   // console.log("check box function")
-   // const {name} = event.target
-   // setIsChecked(name)
-   // setForm_data({...form_data, prefermethod: name})
   };
 
   const handleChange = (event) => {
@@ -69,13 +62,15 @@ function Shippingmethod() {
     setShippingMethods(updatedMethods);
     localStorage.setItem("Shipping Method", JSON.stringify(updatedMethods));
   };
-
+console.log(svg)
   return (
     <div className="shipping-method-component">
-      <div onClick={togglePopup} className="cursor-pointer text-white hover:bg-indigo-600 hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-        <svg className="mr-3 flex-shrink-0 h-6 w-6 text-indigo-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+      <div onClick={togglePopup} className={dynmc_class} >
+        {svg ? (
+          <svg className="mr-3 flex-shrink-0 h-6 w-6 text-indigo-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
-        </svg> Shipping Method
+        </svg>
+        ):('')} Shipping Method
       </div>
       <Popup isOpen={isPopupOpen} handleClose={togglePopup} popupwidth={popupwidth[5]}>
         <div className="popup-component-body">
