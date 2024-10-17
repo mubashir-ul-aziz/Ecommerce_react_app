@@ -20,6 +20,7 @@ function Logout(btnstyle) {
   ];
 
   const link_navigation = [
+    {name: "Go to Cart", path: "/cart", className:"mr-2"},
     { name: "Dashboard", path: "/dashboard", className: "mr-2" },
     { name: "Test", path: "/test", className: "mr-2" },
   ];

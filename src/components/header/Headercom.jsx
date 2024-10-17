@@ -16,7 +16,6 @@ const button_navigation=[
   // {name: "User Profile",path: "/userprofile",className:"mr-2"},
   // {component: <Logout/>}
   { component: <Shippingmethod svg={false} dynmc_class=" mr-2 button inline-flex items-center text-white border-0 py-2 px-4 focus:outline-none rounded text-base mt-4 md:mt-0 " />},
-  {name: "Go to Cart", path: "/cart", className:"mr-2"},
   {component: <Logout btnstyle='btnfalse' />} 
 ]
 

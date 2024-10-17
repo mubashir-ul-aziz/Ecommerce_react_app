@@ -365,6 +365,24 @@ input[type="checkbox"]:checked {
 .child-div-border:last-child {
  border-right: 2px solid rgb(229 231 235 / var(--tw-border-opacity));
 }
+.not-found-component {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  padding: 40px;
+  min-height: 100vh;
+}
+.not-found-component h1 {
+  font-size: 40px;
+}
+.not-found-component p b {
+  font-size: 20px;
+  position: relative;
+  bottom: -2px;
+  left: 3px;
+}
 
 
 

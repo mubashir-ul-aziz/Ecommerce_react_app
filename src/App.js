@@ -26,6 +26,7 @@ import Shippingmethod from 'components/Shippingmethod.jsx'
 import Order from "components/Order.jsx";
 import History from 'components/History.jsx'
 import Users from 'components/Users.jsx'
+import Not_found_page from 'components/Not_found_page.jsx'
 
 function App() {
   const { theme } = useContext(MyContext);
@@ -61,7 +62,8 @@ function App() {
     { path: '/shippingmethod', element: <Shippingmethod/>},
     { path: '/order', element: <Order/>},
     { path: '/history', element: <History/>},
-    { path: '/users', element: <Users/>}
+    { path: '/users', element: <Users/>},
+    { path: '*', element: <Not_found_page heading_name="Page Not Found"/>}
   ];
 
   const login_path_routes = [
